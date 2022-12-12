@@ -4,6 +4,7 @@ import { StaticQuery, graphql } from 'gatsby';
 import GitHubButton from 'react-github-btn';
 import Link from './link';
 import Loadable from 'react-loadable';
+// import styled from 'styled-components';
 
 import config from '../../config.js';
 import LoadingProvider from './mdxComponents/loading';
@@ -11,6 +12,11 @@ import { DarkModeSwitch } from './DarkModeSwitch';
 
 const help = require('./images/help.svg');
 
+const Logo = styled.img`
+  width: 200px;
+  height: 35px;
+  margin: 10px 20px;
+`;
 const isSearchEnabled = config.header.search && config.header.search.enabled ? true : false;
 
 let searchIndices = [];
@@ -24,6 +30,8 @@ if (isSearchEnabled && config.header.search.indexName) {
 }
 
 import Sidebar from './sidebar';
+import { stubTrue } from 'lodash';
+import { Button, Col, Row } from 'antd';
 
 const LoadableComponent = Loadable({
   loader: () => import('./search/index'),
@@ -90,127 +98,87 @@ const Header = ({ location, isDarkThemeActive, toggleActiveTheme }) => (
         },
       } = data;
 
-      const finalLogoLink = logo.link !== '' ? logo.link : 'https://hasura.io/';
+      // const finalLogoLink = logo.link !== '' ? logo.link : 'https://hasura.io/';
 
       return (
-        <div className={'navBarWrapper'}>
-          <nav className={'navBarDefault'}>
-            <div className={'navBarHeader'}>
-              <Link to={finalLogoLink} className={'navBarBrand'}>
-                <img
-                  className={'img-responsive displayInline'}
-                  src={logo.image !== '' ? logo.image : logoImg}
-                  alt={'logo'}
-                />
-              </Link>
-              <div
-                className={'headerTitle displayInline'}
-                dangerouslySetInnerHTML={{ __html: headerTitle }}
+        <Row
+          style={{
+            borderBottom: '1px solid rgba(0,0,0,0.15)',
+          }}
+        >
+          <Col md={6}>
+            <Link to="http://localhost:8000/apitwo">
+              <Logo
+                src="https://www.docs.computervision.com.vn/static/logo-cvs-8d7e167d315ede0146bebe3e494a5898.svg"
+                alt={'logo'}
               />
-            </div>
-            {config.header.social ? (
-              <ul
-                className="socialWrapper visibleMobileView"
-                dangerouslySetInnerHTML={{ __html: config.header.social }}
-              ></ul>
-            ) : null}
-            {isSearchEnabled ? (
-              <div className={'searchWrapper hiddenMobile navBarUL'}>
-                <LoadableComponent collapse={true} indices={searchIndices} />
-              </div>
-            ) : null}
-            <div id="navbar" className={'topnav'}>
-              <div className={'visibleMobile'}>
-                <Sidebar location={location} />
-                <hr />
-              </div>
-              <ul className={'navBarUL navBarNav navBarULRight'}>
-                {headerLinks.map((link, key) => {
-                  if (link.link !== '' && link.text !== '') {
-                    return (
-                      <li key={key}>
-                        <a
-                          className="sidebarLink"
-                          href={link.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          dangerouslySetInnerHTML={{ __html: link.text }}
-                        />
-                      </li>
-                    );
-                  }
-                })}
-                {helpUrl !== '' ? (
-                  <li>
-                    <a href={helpUrl}>
-                      <img src={help} alt={'Help icon'} />
-                    </a>
-                  </li>
-                ) : null}
+            </Link>
+          </Col>
 
-                {tweetText !== '' ? (
-                  <li>
-                    <a
-                      href={'https://twitter.com/intent/tweet?&text=' + tweetText}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <img className={'shareIcon'} src={twitter} alt={'Twitter'} />
-                    </a>
-                  </li>
+          <Col md={14}></Col>
+          <Col md={4} style={{}}>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'end',
+                alignItems: 'center',
+                height: '100%',
+              }}
+            >
+              <Button type="danger" style={{ marginRight: '15px' }} className={'btnVi'}>
+                VI
+              </Button>
+              <Button className={'btnEn'}>EN</Button>
+
+              <nav>
+                <div id="navbar" className={'topnav'}>
+                  <div className={'visibleMobile'}>
+                    <Sidebar location={location} />
+                    <hr />
+                  </div>
+                  <ul className={'navBarUL navBarNav navBarULRight'}>
+                    {headerLinks.map((link, key) => {
+                      if (link.link !== '' && link.text !== '') {
+                        return (
+                          <li key={key}>
+                            <a
+                              className="sidebarLink"
+                              href={link.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              dangerouslySetInnerHTML={{ __html: link.text }}
+                            />
+                          </li>
+                        );
+                      }
+                    })}
+                  </ul>
+                </div>
+              </nav>
+
+              <StyledBgDiv isDarkThemeActive={isDarkThemeActive}>
+                <div className={'navBarDefault removePadd'}>
+                  <span
+                    onClick={myFunction}
+                    className={'navBarToggle'}
+                    onKeyDown={myFunction}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    <span className={'iconBar'}></span>
+                    <span className={'iconBar'}></span>
+                    <span className={'iconBar'}></span>
+                  </span>
+                </div>
+                {isSearchEnabled ? (
+                  <div className={'searchWrapper'}>
+                    <LoadableComponent collapse={true} indices={searchIndices} />
+                  </div>
                 ) : null}
-                {tweetText !== '' || githubUrl !== '' ? (
-                  <li className="divider hiddenMobile"></li>
-                ) : null}
-                {config.header.social ? (
-                  <li className={'hiddenMobile'}>
-                    <ul
-                      className="socialWrapper"
-                      dangerouslySetInnerHTML={{ __html: config.header.social }}
-                    ></ul>
-                  </li>
-                ) : null}
-                {githubUrl !== '' ? (
-                  <li className={'githubBtn'}>
-                    <GitHubButton
-                      href={githubUrl}
-                      data-show-count="true"
-                      aria-label="Star on GitHub"
-                    >
-                      Star
-                    </GitHubButton>
-                  </li>
-                ) : null}
-                <li>
-                  <DarkModeSwitch
-                    isDarkThemeActive={isDarkThemeActive}
-                    toggleActiveTheme={toggleActiveTheme}
-                  />
-                </li>
-              </ul>
+              </StyledBgDiv>
             </div>
-          </nav>
-          <StyledBgDiv isDarkThemeActive={isDarkThemeActive}>
-            <div className={'navBarDefault removePadd'}>
-              <span
-                onClick={myFunction}
-                className={'navBarToggle'}
-                onKeyDown={myFunction}
-                role="button"
-                tabIndex={0}
-              >
-                <span className={'iconBar'}></span>
-                <span className={'iconBar'}></span>
-                <span className={'iconBar'}></span>
-              </span>
-            </div>
-            {isSearchEnabled ? (
-              <div className={'searchWrapper'}>
-                <LoadableComponent collapse={true} indices={searchIndices} />
-              </div>
-            ) : null}
-          </StyledBgDiv>
-        </div>
+          </Col>
+        </Row>
       );
     }}
   />

@@ -4,6 +4,7 @@ import { StaticQuery, graphql } from 'gatsby';
 import styled from '@emotion/styled';
 import { ExternalLink } from 'react-feather';
 import config from '../../../config';
+import { Button } from 'antd';
 
 // eslint-disable-next-line no-unused-vars
 const ListItem = styled(({ className, active, level, ...props }) => {
@@ -107,27 +108,15 @@ const SidebarLayout = ({ location }) => (
       }
     `}
     render={({ allMdx }) => {
+      // console.log(config.sidebar);
       return (
         <Sidebar>
-          {config.sidebar.title ? (
-            <div
-              className={'sidebarTitle hiddenMobile'}
-              dangerouslySetInnerHTML={{ __html: config.sidebar.title }}
-            />
-          ) : null}
           <ul className={'sideBarUL'}>
             <Tree edges={allMdx.edges} />
+            <Button style={{ width: '100%', border: 'none', textAlign: 'left', color: '#3B454E',fontWeight:500 }}>
+              Hướng dẫn sử dụng dashboard
+            </Button>
             {config.sidebar.links && config.sidebar.links.length > 0 && <Divider />}
-            {config.sidebar.links.map((link, key) => {
-              if (link.link !== '' && link.text !== '') {
-                return (
-                  <ListItem key={key} to={link.link}>
-                    {link.text}
-                    <ExternalLink size={14} />
-                  </ListItem>
-                );
-              }
-            })}
           </ul>
         </Sidebar>
       );
