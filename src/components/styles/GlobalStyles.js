@@ -423,6 +423,12 @@ export const baseStyles = css`
   .sideBarUL {
     margin-top: 32px;
   }
+  @media only screen and (max-width: 767px) {
+    .sideBarUL {
+      width: 100%;
+      z-index: 999 !important;
+    }
+  }
 
   .sideBarUL li {
     list-style-type: none;
@@ -821,7 +827,6 @@ export const baseStyles = css`
       margin-right: 0;
       display: block;
       position: absolute;
-      left: 11px;
       top: 15px;
       background: #fff;
     }

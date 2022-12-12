@@ -47,22 +47,46 @@ const ListItem = styled(({ className, active, level, ...props }) => {
 `;
 
 const Sidebar = styled('aside')`
-  width: 100%;
-  height: 100vh;
+  width: 298px;
+  height: 100%;
   overflow: auto;
   position: fixed;
   padding-left: 0px;
   position: -webkit-sticky;
   position: -moz-sticky;
-  position: sticky;
-  top: 0;
+  /* position: sticky; */
+  top: 50;
   padding-right: 0;
   -webkit-box-shadow: -1px 0px 4px 1px rgba(175, 158, 232, 0.4);
 
+  @media (min-width: 1023px) and (max-width: 1199px) {
+    /* width: 100%; */
+    width: 200px;
+    height: 100%;
+    overflow: auto;
+    position: fixed;
+    padding-left: 0px;
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    /* position: sticky; */
+    top: 50;
+    padding-right: 0;
+    -webkit-box-shadow: -1px 0px 4px 1px rgba(175, 158, 232, 0.4);
+  }
+
   @media only screen and (max-width: 1023px) {
-    width: 100%;
-    /* position: relative; */
+    width: 140px;
+
     height: 100vh;
+    overflow: auto;
+    position: fixed;
+    padding-left: 0px;
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    /* position: sticky; */
+    top: 50;
+    padding-right: 0;
+    -webkit-box-shadow: -1px 0px 4px 1px rgba(175, 158, 232, 0.4);
   }
 
   @media (min-width: 767px) and (max-width: 1023px) {
@@ -72,6 +96,10 @@ const Sidebar = styled('aside')`
   @media only screen and (max-width: 767px) {
     padding-left: 0px;
     height: auto;
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    z-index: 999;
   }
 `;
 
@@ -113,8 +141,18 @@ const SidebarLayout = ({ location }) => (
         <Sidebar>
           <ul className={'sideBarUL'}>
             <Tree edges={allMdx.edges} />
-            <Button style={{ width: '100%', border: 'none', textAlign: 'left', color: '#3B454E',fontWeight:500 }}>
-              Hướng dẫn sử dụng dashboard
+            <Button
+              target="_blank"
+              href="https://drive.google.com/file/d/1p0GHrIXJ_dHXJMrIFMe7embYzlGgr9ed/view"
+              style={{
+                width: '100%',
+                border: 'none',
+                textAlign: 'left',
+                color: '#3B454E',
+                fontWeight: 500,
+              }}
+            >
+              dashboard
             </Button>
             {config.sidebar.links && config.sidebar.links.length > 0 && <Divider />}
           </ul>

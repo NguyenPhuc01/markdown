@@ -31,22 +31,12 @@ if (isSearchEnabled && config.header.search.indexName) {
 
 import Sidebar from './sidebar';
 import { stubTrue } from 'lodash';
-import { Button, Col, Row } from 'antd';
+import { Button, Col, Drawer, Row } from 'antd';
 
 const LoadableComponent = Loadable({
   loader: () => import('./search/index'),
   loading: LoadingProvider,
 });
-
-function myFunction() {
-  var x = document.getElementById('navbar');
-
-  if (x.className === 'topnav') {
-    x.className += ' responsive';
-  } else {
-    x.className = 'topnav';
-  }
-}
 
 const StyledBgDiv = styled('div')`
   height: 60px;
@@ -84,6 +74,25 @@ const Header = ({ location, isDarkThemeActive, toggleActiveTheme }) => (
       }
     `}
     render={(data) => {
+      const [open, setOpen] = React.useState(false);
+
+      function myFunction() {
+        setOpen(true);
+        var x = document.getElementById('navbar');
+
+        if (x.className === 'topnav') {
+          x.className += ' responsive';
+        } else {
+          x.className = 'topnav';
+        }
+      }
+      const showDrawer = () => {
+        setOpen(true);
+      };
+
+      const onClose = () => {
+        setOpen(false);
+      };
       const logoImg = require('./images/logo.svg');
 
       const twitter = require('./images/twitter.svg');
@@ -104,9 +113,13 @@ const Header = ({ location, isDarkThemeActive, toggleActiveTheme }) => (
         <Row
           style={{
             borderBottom: '1px solid rgba(0,0,0,0.15)',
+            position: 'sticky',
+            top: 0,
+            backgroundColor: '#fff',
+            zIndex: '999',
           }}
         >
-          <Col md={6}>
+          <Col md={6} xs={12}>
             <Link to="http://localhost:8000/apitwo">
               <Logo
                 src="https://www.docs.computervision.com.vn/static/logo-cvs-8d7e167d315ede0146bebe3e494a5898.svg"
@@ -115,8 +128,8 @@ const Header = ({ location, isDarkThemeActive, toggleActiveTheme }) => (
             </Link>
           </Col>
 
-          <Col md={14}></Col>
-          <Col md={4} style={{}}>
+          <Col md={14} xs={0}></Col>
+          <Col md={4} xs={12}>
             <div
               style={{
                 display: 'flex',
@@ -130,6 +143,26 @@ const Header = ({ location, isDarkThemeActive, toggleActiveTheme }) => (
               </Button>
               <Button className={'btnEn'}>EN</Button>
 
+              <StyledBgDiv isDarkThemeActive={isDarkThemeActive}>
+                <div className={'navBarDefault removePadd'}>
+                  <span
+                    onClick={myFunction}
+                    className={'navBarToggle'}
+                    onKeyDown={myFunction}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    <span className={'iconBar'}></span>
+                    <span className={'iconBar'}></span>
+                    <span className={'iconBar'}></span>
+                  </span>
+                </div>
+                {isSearchEnabled ? (
+                  <div className={'searchWrapper'}>
+                    <LoadableComponent collapse={true} indices={searchIndices} />
+                  </div>
+                ) : null}
+              </StyledBgDiv>
               <nav>
                 <div id="navbar" className={'topnav'}>
                   <div className={'visibleMobile'}>
@@ -155,27 +188,6 @@ const Header = ({ location, isDarkThemeActive, toggleActiveTheme }) => (
                   </ul>
                 </div>
               </nav>
-
-              <StyledBgDiv isDarkThemeActive={isDarkThemeActive}>
-                <div className={'navBarDefault removePadd'}>
-                  <span
-                    onClick={myFunction}
-                    className={'navBarToggle'}
-                    onKeyDown={myFunction}
-                    role="button"
-                    tabIndex={0}
-                  >
-                    <span className={'iconBar'}></span>
-                    <span className={'iconBar'}></span>
-                    <span className={'iconBar'}></span>
-                  </span>
-                </div>
-                {isSearchEnabled ? (
-                  <div className={'searchWrapper'}>
-                    <LoadableComponent collapse={true} indices={searchIndices} />
-                  </div>
-                ) : null}
-              </StyledBgDiv>
             </div>
           </Col>
         </Row>

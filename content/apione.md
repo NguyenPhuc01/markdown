@@ -1,6 +1,7 @@
 ---
 path: '/apione/'
 title: 'API v1'
+author: 'Tuan'
 date: '2022-09-08'
 abstract: 'The greatttttttttt'
 ---
@@ -46,21 +47,21 @@ Cách hoạt động:
 
 OCR service là hệ thống AI cho phép trích xuất thông tin từ ảnh chứng minh nhân dân, thẻ căn cước của công dân Việt Nam, bằng lái xe, Passport. Hệ thống hỗ trợ nhận diện cả mặt trước và cả mặt sau của chứng minh nhân dân và thẻ căn cước công dân, hỗ trợ bằng lái xe, Passport, hỗ trợ cả chứng minh nhân dân cũ.
 
-1. Trách xuất thông tin hai mặt chứng minh thứ thẻ căn cước với đầu url vào ảnh
+<!-- 1. Trách xuất thông tin hai mặt chứng minh thứ thẻ căn cước với đầu url vào ảnh
 
 **API:**
 
-| Key       | Value                              | Mô tả                                      |
-| --------- | ---------------------------------- | ------------------------------------------ |
-| mat truoc | `https://example.com/mattruoc.png` | url ảnh mặt trước cần trích xuất thông tin |
-| mat sau   | `https://example.com/mattruoc.png` | url ảnh mặt sau cần trích xuất thông tin   |
+| Key | Value | Mô tả |
+| -----| -----| ----- |
+|mat truoc | `https://example.com/mattruoc.png` |url ảnh mặt trước cần trích xuất thông tin|
+|mat sau | `https://example.com/mattruoc.png` |url ảnh mặt sau cần trích xuất thông tin|
 
 **Params:**
 
-| Key       | Value                              | Mô tả                                      |
-| --------- | ---------------------------------- | ------------------------------------------ |
-| mat truoc | `https://example.com/mattruoc.png` | url ảnh mặt trước cần trích xuất thông tin |
-| mat sau   | `https://example.com/mattruoc.png` | url ảnh mặt sau cần trích xuất thông tin   |
+| Key | Value | Mô tả |
+| -----| -----| ----- |
+|mat truoc | `https://example.com/mattruoc.png` |url ảnh mặt trước cần trích xuất thông tin|
+|mat sau | `https://example.com/mattruoc.png` |url ảnh mặt sau cần trích xuất thông tin|
 
 **Demo Python:**
 
@@ -83,15 +84,15 @@ print(response.json())
 
 **API:**
 
-| Key | Value                                                                                                         |
-| --- | ------------------------------------------------------------------------------------------------------------- |
-| GET | <span class="span_api">`https://cloud.computervision.com.vn/backend/api/v1/request/ocr/cmt/get_haimat`</span> |
+| Key | Value |
+| -----| -----|
+| GET| <span class="span_api">`https://cloud.computervision.com.vn/backend/api/v1/request/ocr/cmt/get_haimat`</span>|
 
 **Params:**
 
-| Key                                     | Value                                                            | Mô tả                                                                    |
-| --------------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| <span class="span_api">mat truoc</span> | <span class="span_api">`https://example.com/mattruoc.png`</span> | <span class="span_api">url ảnh mặt trước cần trích xuất thông tin</span> |
+| Key | Value | Mô tả |
+| -----| -----| ----- |
+|<span class="span_api">mat truoc</span> | <span class="span_api">`https://example.com/mattruoc.png`</span> |<span class="span_api">url ảnh mặt trước cần trích xuất thông tin</span>|
 
 **Demo Python:**
 
@@ -109,4 +110,4 @@ auth=(api_key, api_secret))
 
 print(response.json())
 
-```
+``` -->

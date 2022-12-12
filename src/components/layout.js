@@ -60,6 +60,12 @@ const LeftSideBarWidth = styled('div')`
 
 const RightSideBarWidth = styled('div')`
   width: 224px;
+  @media (min-width: 1023px) and (max-width: 1199px) {
+    width: 300px;
+  }
+  @media only screen and (max-width: 50rem) {
+    width: 300px;
+  }
 `;
 
 const Layout = ({ children, location }) => (
